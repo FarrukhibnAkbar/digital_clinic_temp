@@ -7,7 +7,6 @@
             v-model="drawer"
             :rail="rail"
             permanent
-            @click="rail = true"
         >
           <v-list-item
               prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
@@ -31,6 +30,8 @@
                 v-for="(item, i) in lists"
                 :key="i"
                 :value="item"
+                :to="item.link"
+                link
             >
               <template v-slot:prepend>
                 <v-icon :icon="item.icon"></v-icon>
@@ -51,7 +52,7 @@
         </v-navigation-drawer>
         <v-main style="min-height: 95vh; background: green">
           <v-container>
-
+            <router-view></router-view>
           </v-container>
         </v-main>
       </v-layout>
@@ -69,9 +70,9 @@ export default {
       drawer: true,
       rail: false,
       lists: [
-        {icon: 'mdi-home-city', text: 'Home'},
-        {icon: "mdi-account", text: "My Account"},
-        {icon: "mdi-account-group-outline", text: "Users"}
+        {icon: 'mdi-home-city', text: 'Home', link: '/'},
+        {icon: "mdi-account", text: "Patients", link: '/patients'},
+        {icon: "mdi-account-group-outline", text: "Users", link: '/users'}
       ]
     }
   },
