@@ -1,10 +1,25 @@
 <template>
     <v-card>
       <v-layout>
+        <v-app-bar color="primary">
+          <v-app-bar-nav-icon variant="text" @click.stop="rail = !rail"></v-app-bar-nav-icon>
+
+          <v-toolbar-title>My files</v-toolbar-title>
+
+          <v-spacer></v-spacer>
+
+          <template v-if="$vuetify.display.mdAndUp">
+            <v-btn icon="mdi-magnify" variant="text"></v-btn>
+
+            <v-btn icon="mdi-filter" variant="text"></v-btn>
+          </template>
+
+          <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+        </v-app-bar>
+
         <v-navigation-drawer
             image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
             theme="dark"
-            v-model="drawer"
             :rail="rail"
             permanent
         >
@@ -14,13 +29,13 @@
               subtitle="Lorem "
               nav
           >
-            <template v-slot:append>
-              <v-btn
-                  icon="mdi-chevron-left"
-                  variant="text"
-                  @click.stop="rail = !rail"
-              ></v-btn>
-            </template>
+<!--            <template v-slot:append>-->
+<!--              <v-btn-->
+<!--                  icon="mdi-chevron-left"-->
+<!--                  variant="text"-->
+<!--                  @click.stop="rail = !rail"-->
+<!--              ></v-btn>-->
+<!--            </template>-->
           </v-list-item>
 
           <v-divider></v-divider>
@@ -67,7 +82,7 @@ export default {
   },
   data () {
     return {
-      drawer: true,
+      // drawer: true,
       rail: false,
       lists: [
         {icon: 'mdi-home-city', text: 'Home', link: '/'},

@@ -3,7 +3,7 @@
   <v-data-table
       v-model:page="page"
       :headers="headers"
-      :items="desserts"
+      :items="users"
       :items-per-page="itemsPerPage"
   >
 
@@ -40,100 +40,94 @@
             <v-row dense>
               <v-col
                   cols="12"
-                  md="4"
+                  md="12"
                   sm="6"
               >
                 <v-text-field
                     v-model="fullName"
-                    label="F.I.O.*"
+                    label="F.I.O.:*"
+                    variant="outlined"
+                    clearable
+                    align="left"
                     :rules="rules"
                 ></v-text-field>
               </v-col>
 
               <v-col
                   cols="12"
-                  md="4"
+                  md="12"
                   sm="6"
               >
                 <v-text-field
-                    hint="example of helper text only on focus"
-                    label="Middle name"
+                    v-model="birthData"
+                    label="tug`ulgan sana:*"
+                    type="date"
+                    variant="outlined"
+                    align="center"
+                    :rules="rules"
+                    input-class="text-center"
                 ></v-text-field>
               </v-col>
 
               <v-col
                   cols="12"
-                  md="4"
+                  md="12"
                   sm="6"
               >
                 <v-text-field
-                    hint="example of persistent helper text"
-                    label="Last name*"
-                    persistent-hint
-                    required
+                    v-model="pinfl"
+                    label="JShShIR:*"
+                    type="number"
+                    :error="pinfl && pinfl.length !== 14"
+                    variant="outlined"
+                    input-class="text-center"
                 ></v-text-field>
               </v-col>
 
               <v-col
                   cols="12"
-                  md="4"
+                  md="12"
                   sm="6"
               >
                 <v-text-field
-                    label="Email*"
-                    required
+                    v-model="phone"
+                    label="telefon raqam:*"
+                    type="phone"
+                    variant="outlined"
+                    :rules="rules"
                 ></v-text-field>
               </v-col>
 
               <v-col
                   cols="12"
-                  md="4"
+                  md="12"
                   sm="6"
               >
                 <v-text-field
-                    label="Password*"
-                    type="password"
-                    required
+                    v-model="position"
+                    label="lavozimi:*"
+                    variant="outlined"
+                    :rules="rules"
                 ></v-text-field>
               </v-col>
 
               <v-col
                   cols="12"
-                  md="4"
-                  sm="6"
-              >
-                <v-text-field
-                    label="Confirm Password*"
-                    type="password"
-                    required
-                ></v-text-field>
-              </v-col>
-
-              <v-col
-                  cols="12"
-                  sm="6"
-              >
-                <v-select
-                    :items="['0-17', '18-29', '30-54', '54+']"
-                    label="Age*"
-                    required
-                ></v-select>
-              </v-col>
-
-              <v-col
-                  cols="12"
+                  md="12"
                   sm="6"
               >
                 <v-autocomplete
+                    v-model="direction"
                     :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                    label="Interests"
-                    auto-select-first
-                    multiple
+                    label="yo`naalishi:*"
+                    variant="outlined"
+                    :rules="rules"
+                    clearable
                 ></v-autocomplete>
               </v-col>
             </v-row>
 
-            <small class="text-caption text-medium-emphasis">*indicates required field</small>
+            <small class="text-caption text-medium-emphasis">*ko`rsatgichi majburiy maydon</small>
           </v-card-text>
 
           <v-divider></v-divider>
@@ -162,45 +156,44 @@ export default {
   data () {
     return {
       fullName: null,
+      bithDate: null,
+      pinfl: null,
+      phone: null,
+      position: null,
+      direction: null,
       modal: false,
       page: 1,
       itemsPerPage: 5,
       headers: [
-        {
-          align: 'start',
-          key: 'name',
-          sortable: false,
-          title: 'Dessert (100g serving)',
-        },
-        { title: 'Calories', key: 'calories' },
-        { title: 'Fat (g)', key: 'fat' },
-        { title: 'Carbs (g)', key: 'carbs' },
-        { title: 'Protein (g)', key: 'protein' },
-        { title: 'Iron (%)', key: 'iron' },
-        { title: 'Iron (%)', key: 'iron' },
+        { title: 'F.I.O.', key: 'full_name', sortable: true, align: 'center' },
+        { title: 'tug`ulgan sanasi', key: 'birth_date' },
+        { title: 'JShShIR', key: 'pinfl' },
+        { title: 'telefon raqami', key: 'phone' },
+        { title: 'lavozimi', key: 'position' },
+        { title: 'yo`naalishi', key: 'direction' },
       ],
-      desserts: [
+      users: [
         {
-          name: 'Frozen Yogurt',
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
+          full_name: 'Frozen Yogurt',
+          birth_date: '2000-01-01',
+          pinfl: 60101001010001,
+          phone: '+998901234567',
+          position: 'Vrach',
+          direction: 'Pediatr',
         },
       ],
       rules: [
         value => {
           if (value?.length == 0 ) return true
 
-          return 'F.I.O kiritilishi shart !!!'
+          return 'Maydonni kiritish shart !!!'
         },
       ],
     }
   },
   computed: {
     pageCount () {
-      return Math.ceil(this.desserts.length / this.itemsPerPage)
+      return Math.ceil(this.users.length / this.itemsPerPage)
     },
   },
 }
