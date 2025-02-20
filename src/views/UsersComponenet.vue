@@ -1,4 +1,5 @@
 <template>
+
 <!--  Table data-->
   <v-data-table
       v-model:page="page"
@@ -6,6 +7,18 @@
       :items="users"
       :items-per-page="itemsPerPage"
   >
+    <template v-slot:item="{ item }">
+      <tr>
+        <td>{{ item.full_name }}</td>
+        <td>{{ item.birth_date }}</td>
+        <td>{{ item.pinfl }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.position }}</td>
+        <td>{{ item.direction }}</td>
+        <td><v-icon aria-hidden="false" color="red">mdi-delete</v-icon></td>
+      </tr>
+    </template>
+
 
     <template v-slot:bottom>
       <div class="d-flex pl-3">
@@ -48,8 +61,6 @@
                     label="F.I.O.:*"
                     variant="outlined"
                     clearable
-                    align="left"
-                    :rules="rules"
                 ></v-text-field>
               </v-col>
 
@@ -59,12 +70,10 @@
                   sm="6"
               >
                 <v-text-field
-                    v-model="birthData"
+                    v-model="birthDate"
                     label="tug`ulgan sana:*"
                     type="date"
                     variant="outlined"
-                    align="center"
-                    :rules="rules"
                     input-class="text-center"
                 ></v-text-field>
               </v-col>
@@ -78,7 +87,6 @@
                     v-model="pinfl"
                     label="JShShIR:*"
                     type="number"
-                    :error="pinfl && pinfl.length !== 14"
                     variant="outlined"
                     input-class="text-center"
                 ></v-text-field>
@@ -94,7 +102,6 @@
                     label="telefon raqam:*"
                     type="phone"
                     variant="outlined"
-                    :rules="rules"
                 ></v-text-field>
               </v-col>
 
@@ -107,7 +114,6 @@
                     v-model="position"
                     label="lavozimi:*"
                     variant="outlined"
-                    :rules="rules"
                 ></v-text-field>
               </v-col>
 
@@ -121,7 +127,6 @@
                     :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                     label="yo`naalishi:*"
                     variant="outlined"
-                    :rules="rules"
                     clearable
                 ></v-autocomplete>
               </v-col>
@@ -137,13 +142,13 @@
 
             <v-btn
                 variant="plain"
-                @click="modal = false"
+                @click="modal = false, restForm()"
             >Bekor qilish</v-btn>
 
             <v-btn
                 color="primary"
                 variant="tonal"
-                @click="modal = false"
+                @click="modal = false, addFormData()"
             >Saqlash</v-btn>
           </v-card-actions>
         </v-card>
@@ -152,11 +157,12 @@
   </modal>
 </template>
 <script>
+
 export default {
   data () {
     return {
       fullName: null,
-      bithDate: null,
+      birthDate: null,
       pinfl: null,
       phone: null,
       position: null,
@@ -171,17 +177,9 @@ export default {
         { title: 'telefon raqami', key: 'phone' },
         { title: 'lavozimi', key: 'position' },
         { title: 'yo`naalishi', key: 'direction' },
+        { title: 'o`chirish', key: 'delete' },
       ],
-      users: [
-        {
-          full_name: 'Frozen Yogurt',
-          birth_date: '2000-01-01',
-          pinfl: 60101001010001,
-          phone: '+998901234567',
-          position: 'Vrach',
-          direction: 'Pediatr',
-        },
-      ],
+      users: [],
       rules: [
         value => {
           if (value?.length == 0 ) return true
@@ -196,5 +194,20 @@ export default {
       return Math.ceil(this.users.length / this.itemsPerPage)
     },
   },
+  methods: {
+    addFormData(){
+      this.users.push({full_name: this.fullName, birth_date: this.birthDate, pinfl: this.pinfl, phone: this.phone, position: this.position, direction: this.direction})
+      this.restForm()
+    },
+
+    restForm(){
+      this.fullName = null;
+      this.birthDate = null;
+      this.pinfl = null;
+      this.phone = null;
+      this.position = null;
+      this.direction = null;
+    }
+  }
 }
 </script>
