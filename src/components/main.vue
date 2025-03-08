@@ -65,7 +65,7 @@
             </div>
           </template>
         </v-navigation-drawer>
-        <v-main style="min-height: 95vh; background: green">
+        <v-main style="min-height: 95vh; background: none">
           <v-container>
             <router-view></router-view>
           </v-container>

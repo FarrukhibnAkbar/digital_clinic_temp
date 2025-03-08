@@ -1,18 +1,17 @@
 <template>
-  <h1>Here should be Patients</h1>
+  <v-btn @click="showSuccessToast">Show Success Toast</v-btn>
+  <v-btn @click="showErrorToast">Show Error Toast</v-btn>
 </template>
 
 <script>
 export default {
-  data(){
-    return{
-
+  methods: {
+    showSuccessToast() {
+      this.$toast('Success! Operation completed.', 'success');
+    },
+    showErrorToast() {
+      this.$toast('Error! Something went wrong.', 'error');
     }
   }
-}
-
+};
 </script>
-
-<style scoped>
-
-</style>

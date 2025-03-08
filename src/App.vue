@@ -1,14 +1,19 @@
 <template>
+  <ToastMessage />
   <mainPage msg="Main page"/>
 </template>
 
+
 <script>
 import mainPage from './components/main.vue'
+import ToastMessage from "@/components/ToastMessage.vue";
+import { inject } from 'vue';
 
 export default {
-  name: 'App',
-  components: {
-    mainPage
+  components: {ToastMessage, mainPage},
+  setup() {
+    const toastState = inject('toastState')
+    return { toastState }
   }
 }
 </script>

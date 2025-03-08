@@ -1,5 +1,8 @@
 <template>
 
+
+
+<!--  <ToastMessage type="success" message="Bu xato!"/>-->
 <!--  Table data-->
   <v-data-table
       v-model:page="page"
@@ -36,6 +39,7 @@
       </div>
     </template>
   </v-data-table>
+
 
 <!--  Modal form-->
   <modal>
@@ -74,7 +78,7 @@
                     label="tug`ulgan sana:*"
                     type="date"
                     variant="outlined"
-                    input-class="text-center"
+                    class="text-center"
                 ></v-text-field>
               </v-col>
 
@@ -88,7 +92,7 @@
                     label="JShShIR:*"
                     type="number"
                     variant="outlined"
-                    input-class="text-center"
+                    style="text-align: center;"
                 ></v-text-field>
               </v-col>
 
@@ -102,6 +106,7 @@
                     label="telefon raqam:*"
                     type="phone"
                     variant="outlined"
+                    style="text-align: center;"
                 ></v-text-field>
               </v-col>
 
@@ -148,7 +153,7 @@
             <v-btn
                 color="primary"
                 variant="tonal"
-                @click="modal = false, addFormData()"
+                @click="addFormData()"
             >Saqlash</v-btn>
           </v-card-actions>
         </v-card>
@@ -158,7 +163,10 @@
 </template>
 <script>
 
+// import ToastMessage from "@/components/ToastMessage.vue";
+
 export default {
+  // components: {ToastMessage},
   data () {
     return {
       fullName: null,
@@ -195,8 +203,25 @@ export default {
     },
   },
   methods: {
+
     addFormData(){
-      this.users.push({full_name: this.fullName, birth_date: this.birthDate, pinfl: this.pinfl, phone: this.phone, position: this.position, direction: this.direction})
+      debugger
+      console.log('wqrww')
+      if(this.checkFormValidation()){
+        debugger
+        this.$toast("Maydonlar to`ldirilganligini tekshiring!", "error")
+        return
+      }
+      this.users.push(
+          {
+            full_name: this.fullName,
+            birth_date: this.birthDate,
+            pinfl: this.pinfl,
+            phone: this.phone,
+            position: this.position,
+            direction: this.direction
+          })
+      this.modal = false
       this.restForm()
     },
 
@@ -207,6 +232,16 @@ export default {
       this.phone = null;
       this.position = null;
       this.direction = null;
+    },
+
+    checkFormValidation(){
+      /*eslint no-debugger: 0*/
+      // debugger
+      // console.log('nimadir')
+      if(!this.fullName || !this.birthDate || this.pinfl.length != 14 || !this.phone || !this.position || !this.direction){
+        return true
+      }
+      return false
     }
   }
 }
