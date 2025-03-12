@@ -1,8 +1,5 @@
 <template>
 
-
-
-<!--  <ToastMessage type="success" message="Bu xato!"/>-->
 <!--  Table data-->
   <v-data-table
       v-model:page="page"
@@ -18,7 +15,7 @@
         <td>{{ item.phone }}</td>
         <td>{{ item.position }}</td>
         <td>{{ item.direction }}</td>
-        <td><v-icon aria-hidden="false" color="red">mdi-delete</v-icon></td>
+        <td><v-icon @click="remove(item.id)" aria-hidden="false" color="red">mdi-delete</v-icon></td>
       </tr>
     </template>
 
@@ -26,9 +23,16 @@
     <template v-slot:bottom>
       <div class="d-flex pl-3">
         <v-btn
-            color="success"
+            color="cyan-accent-2"
+            icon="mdi-plus"
             @click="modal = true">
-          Ma`lumot qo`shish
+          <v-tooltip >
+          <template v-slot:activator="{ props }">
+            <v-icon v-bind="props" icon="mdi-plus"></v-icon>
+          </template>
+
+            Foydalanuvchi qo`shish
+        </v-tooltip>
         </v-btn>
       </div>
       <div class="text-center pt-2">
@@ -47,6 +51,7 @@
       <v-dialog
           v-model="modal"
           max-width="600"
+          persistent
       >
 
         <v-card
@@ -146,13 +151,14 @@
             <v-spacer></v-spacer>
 
             <v-btn
-                variant="plain"
-                @click="modal = false, restForm()"
+                variant="outlined"
+                color="warning"
+                @click="modal = false, resetForm()"
             >Bekor qilish</v-btn>
 
             <v-btn
-                color="primary"
-                variant="tonal"
+                variant="outlined"
+                color="success"
                 @click="addFormData()"
             >Saqlash</v-btn>
           </v-card-actions>
@@ -163,10 +169,8 @@
 </template>
 <script>
 
-// import ToastMessage from "@/components/ToastMessage.vue";
 
 export default {
-  // components: {ToastMessage},
   data () {
     return {
       fullName: null,
@@ -205,15 +209,13 @@ export default {
   methods: {
 
     addFormData(){
-      debugger
-      console.log('wqrww')
       if(this.checkFormValidation()){
-        debugger
         this.$toast("Maydonlar to`ldirilganligini tekshiring!", "error")
         return
       }
       this.users.push(
           {
+            id: this.users.length + 1 || 1,
             full_name: this.fullName,
             birth_date: this.birthDate,
             pinfl: this.pinfl,
@@ -222,10 +224,15 @@ export default {
             direction: this.direction
           })
       this.modal = false
-      this.restForm()
+      this.resetForm()
     },
 
-    restForm(){
+    remove (id) {
+      const index = this.users.findIndex(user => user.id === id)
+      this.users.splice(index, 1)
+    },
+
+    resetForm(){
       this.fullName = null;
       this.birthDate = null;
       this.pinfl = null;
@@ -235,9 +242,6 @@ export default {
     },
 
     checkFormValidation(){
-      /*eslint no-debugger: 0*/
-      // debugger
-      // console.log('nimadir')
       if(!this.fullName || !this.birthDate || this.pinfl.length != 14 || !this.phone || !this.position || !this.direction){
         return true
       }
