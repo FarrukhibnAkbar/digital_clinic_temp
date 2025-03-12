@@ -12,6 +12,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import store from '@/store/store';
 
 // Components
 const vuetify = createVuetify({
@@ -24,4 +25,5 @@ createApp(App)
     .use(router)
     .use(VueTheMask)
     .use(Toast)
+    .use(store)
     .mount('#app')

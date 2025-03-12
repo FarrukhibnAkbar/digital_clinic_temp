@@ -5,17 +5,17 @@
 
 
 <script>
-import mainPage from './components/main.vue'
 import ToastMessage from "@/components/ToastMessage.vue";
-import LoginPage from "@/components/LoginPage.vue";
+import authLayout from "@/layouts/AuthLayout.vue";
+import mainLayout from "@/layouts/MainLayout.vue";
 import { inject } from 'vue';
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 
 export default {
-  components: {ToastMessage, mainPage},
+  components: {ToastMessage},
   setup() {
-    const layouts = { mainPage: mainPage, authPage: LoginPage }
+    const layouts = { mainPage: mainLayout, authPage: authLayout }
     const route = useRoute();
     const layout = computed(() => layouts[route.meta.layout])
     const toastState = inject('toastState')
