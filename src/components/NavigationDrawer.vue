@@ -69,14 +69,14 @@ export default {
     return {
       menus: [
         {icon: 'mdi-monitor-dashboard', colour: 'red', text: 'Dashboard', link: '/dashboard'},
-        {icon: 'mdi-clipboard-account', text: 'Patient registration'},
+        {icon: 'mdi-clipboard-account', text: 'Patient registration', link: '/patient_registration'},
         {icon: "mdi-account", text: "Patients", link: '/patients'},
-        {icon: "mdi-calendar-multiple", text: "Appointment scheduling"},
+        {icon: "mdi-calendar-multiple", text: "Appointment scheduling", link: '/appointment_scheduling'},
         {icon: "mdi-stethoscope", text: "OPD"},
         {icon: "mdi-needle", text: "IPD"},
-        {icon: "mdi-seat-individual-suite", text: "Bed status"},
-        {icon: "mdi-flask-outline", text: "Laboratory pathology"},
-        {icon: "mdi-cash-multiple", text: "Billing & invoicing"},
+        {icon: "mdi-seat-individual-suite", text: "Bed status", link: '/bed_status'},
+        {icon: "mdi-flask-outline", text: "Laboratory pathology", link: '/labaratory'},
+        {icon: "mdi-cash-multiple", text: "Billing & invoicing", link: '/invoice'},
         {icon: "mdi-doctor", text: "Doctors", link: '/users', divider: true }
       ]
     }

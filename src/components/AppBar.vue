@@ -1,6 +1,5 @@
 <template>
   <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
-<!--    <v-app-bar-nav-icon :icon=" !rail ? 'mdi-arrow-left-circle-outline' : 'mdi-arrow-right-circle-outline'" variant="text" @click.stop="rail = !rail"></v-app-bar-nav-icon>-->
     <v-app-bar-nav-icon :icon=" !rail ? 'mdi-arrow-left-circle-outline' : 'mdi-arrow-right-circle-outline'" variant="text" @click.stop="$toggleSideBar"></v-app-bar-nav-icon>
 
     <v-toolbar-title>My files</v-toolbar-title>
@@ -25,7 +24,7 @@
         <v-icon>mdi-bell-outline</v-icon>
       </v-badge>
     </v-btn>
-    <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+<!--    <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>-->
 
     <v-menu min-width="200px">
       <template v-slot:activator="{ props }">
@@ -33,6 +32,8 @@
             icon
             v-bind="props"
         >
+
+<!--          avatar-->
           <v-avatar
               color="brown"
               class="mx-2"
@@ -45,35 +46,50 @@
           </v-avatar>
         </v-btn>
       </template>
+
+<!--      avatar menu-->
       <v-card>
         <v-card-text>
-          <div class="mx-auto text-center">
-            <v-avatar
-                color="brown"
-            >
-              <span class="text-h5">{{ user.initials }}</span>
-            </v-avatar>
-            <h3>{{ user.fullName }}</h3>
-            <p class="text-caption mt-1">
-              {{ user.email }}
-            </p>
-            <v-divider class="my-3"></v-divider>
+          <v-row class="my-auto flex-column align-start">
             <v-btn
                 variant="text"
                 rounded
+                prepend-icon="mdi-cog"
             >
-              Edit Account
+              Settings
             </v-btn>
+            <v-btn
+                variant="text"
+                rounded
+                prepend-icon="mdi-calendar-month-outline"
+            >
+              Activity
+            </v-btn>
+            <v-btn
+                variant="text"
+                rounded
+                prepend-icon="mdi-palette-outline"
+            >
+              Theme
+            </v-btn>
+            <v-btn
+                variant="text"
+                rounded
+                prepend-icon="mdi-lifebuoy"
+            >
+              Support
+            </v-btn>
+
             <v-divider class="my-3"></v-divider>
             <v-btn
                 variant="text"
                 rounded
-                prepend-icon="mdi mdi-logout"
+                prepend-icon="mdi-logout"
                 @click="logOut()"
             >
               Logout
             </v-btn>
-          </div>
+          </v-row>
         </v-card-text>
       </v-card>
     </v-menu>

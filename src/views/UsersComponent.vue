@@ -39,6 +39,8 @@
         <v-pagination
             v-model="page"
             :length="pageCount"
+            :total-visible="4"
+            rounded="circle"
         ></v-pagination>
       </div>
     </template>
