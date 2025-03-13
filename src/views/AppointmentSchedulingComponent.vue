@@ -1,9 +1,11 @@
 <template>
     <v-data-table
+      class="theme --dark"
       v-model:page="page"
       :headers="headers"
       :items="vegetables"
       :items-per-page="itemsPerPage"
+      hover
     >
       <template v-slot:item="{ item }">
         <tr>

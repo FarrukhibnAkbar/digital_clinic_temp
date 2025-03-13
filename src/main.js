@@ -1,10 +1,15 @@
 import { createApp} from 'vue'
 import App from './App.vue'
 import VueTheMask from 'vue-the-mask';
+
+// Toast
 import Toast from "@/plugins/toast";
 
 // Router
 import router from "../src/router/router";
+
+// store
+import store from '@/store/store';
 
 // Vuetify
 import '@mdi/font/css/materialdesignicons.min.css'
@@ -12,13 +17,12 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import store from '@/store/store';
-
-// Components
 const vuetify = createVuetify({
     components,
     directives,
 })
+
+
 
 createApp(App)
     .use(vuetify)

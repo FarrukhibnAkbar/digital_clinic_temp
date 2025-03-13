@@ -19,7 +19,13 @@
     </template>
 
 
-    <v-btn class="text-none" stacked>
+
+
+    <v-btn  @click="toggleTheme()" class="text-none" stacked>
+        <v-icon>{{ themeIcon === 'light' ? 'mdi-weather-night' : 'mdi-white-balance-sunny' }}</v-icon>
+    </v-btn>
+
+    <v-btn  class="text-none" stacked>
       <v-badge color="error" content="2">
         <v-icon>mdi-bell-outline</v-icon>
       </v-badge>
@@ -98,10 +104,13 @@
 
 <script>
 import {mapState, mapActions} from "vuex";
+import { useTheme } from 'vuetify'
 
 export default {
   data () {
     return {
+      themeIcon: localStorage.getItem('mode') || 'light' ,
+      theme: useTheme(),
       user: {
         initials: 'JD',
         fullName: 'John Doe',
@@ -109,15 +118,36 @@ export default {
       }
     }
   },
+
+  mounted() {
+    this.theme.global.name =  this.themeIcon == 'dark' ? 'dark' : 'light';
+  },
+  
   methods: {
     ...mapActions(['$toggleSideBar']),
+
     logOut() {
       localStorage.setItem('auth', false);
       this.$router.replace({ name: 'Login' })
+    },
+
+    toggleTheme() {
+      this.themeIcon = this.themeIcon == 'dark' ? 'light' : 'dark';
+      console.log(this.themeIcon);      
+
+      localStorage.setItem('mode', this.themeIcon);
+      console.log(this.theme.global.name, localStorage.getItem('mode'));
+
+      this.theme.global.name =  this.themeIcon == 'dark' ? 'dark' : 'light';
+      console.log(this.themeIcon);
     }
   },
   computed: {
-    ...mapState({rail: "navBarToggle"})
+    ...mapState({rail: "navBarToggle"}),
+
+    // themeIcon() {
+    //   return localStorage.getItem('mode')
+    // }
   }
 
 }
