@@ -1,20 +1,38 @@
 <template>
   <v-navigation-drawer
-      image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-      theme="dark"
       :rail="rail"
       permanent
       class="py-2"
   >
-    <v-list-item
+    <!-- <v-list-item
         prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
         title="John Leider"
         subtitle="Lorem "
         nav
+        class="my-1"
     >
-    </v-list-item>
+    </v-list-item> -->
+    <v-row class="m-0 align-center">
+      <v-col cols="4">
+        <v-avatar
+                  color="brown"
+                  size="55"
+                  rounded="0"
+              >
+                <v-img
+                    alt="John"
+                    src="https://cdn.vuetifyjs.com/images/john.jpg"
+                ></v-img>
+          </v-avatar>
+      </v-col>
+      <v-col v-show="!rail" class="text-left">
+        <h3>Jessica Jones</h3>
+        <p style="font-size: 14px;">University of Computer Science </p>        
+      </v-col>
+        
+    </v-row>
 
-    <v-divider></v-divider>
+    <!-- <v-divider></v-divider> -->
 
     <v-list density="compact" nav>
       <v-list-item
@@ -26,8 +44,7 @@
       >
 
         <v-divider
-            class="border-opacity-100"
-            color="danger"
+            class="border-opacity-100 mb-1"
             v-if="item.divider"
         ></v-divider>
 

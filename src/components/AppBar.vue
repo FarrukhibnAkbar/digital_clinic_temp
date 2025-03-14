@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar image="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
+  <v-app-bar>
     <v-app-bar-nav-icon :icon=" !rail ? 'mdi-arrow-left-circle-outline' : 'mdi-arrow-right-circle-outline'" variant="text" @click.stop="$toggleSideBar"></v-app-bar-nav-icon>
 
     <v-toolbar-title>My files</v-toolbar-title>

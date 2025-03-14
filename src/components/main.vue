@@ -3,15 +3,15 @@
       <v-layout>
 
         <!--        navigation drawer-->
-        <navigationDrawer/>
+        <navigationDrawer :class="bgColor"/>
 
         <!--        app bar-->
-        <appBar/>
+        <appBar :class="[bgColor, textColor]"/>
 
         <!--        router view-->
-        <v-main class="main" style="min-height: 95vh; ">
-          <v-container>
-            <router-view></router-view>
+        <v-main class="main" :class="bgColor" style="min-height: 95vh; ">
+          <v-container :class="borderColor">
+            <router-view :class="bgColor"></router-view>
           </v-container>
         </v-main>
       </v-layout>
@@ -27,7 +27,14 @@ export default {
   name: 'mainPage',
   props: {
     msg: String
-  }
+  },
+  data() {
+    return {
+      bgColor: 'bg-background',
+      borderColor: 'border border-border-color',
+      textColor: 'text-theme-on-code'
+    }
+  },
 }
 </script>
 
@@ -37,7 +44,7 @@ export default {
 }
 
 .main{
-  background-image: url("https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg");
+  /* background-image: url("https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
